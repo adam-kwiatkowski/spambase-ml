@@ -7,7 +7,7 @@ This repository is divided into two parts, the frontend and the backend. The fro
 
 Informations about the API and training the model can be found in the [backend README](backend/README.md).
 
-![Screenshot](https://i.imgur.com/1ftmaZx.png)
+![Screenshot](https://user-images.githubusercontent.com/22380943/217821523-f9ebc812-91c0-4181-95c1-b8900251ac12.png)
 
 ## Running the web app
 ```console
