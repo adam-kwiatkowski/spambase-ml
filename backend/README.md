@@ -1,5 +1,5 @@
 # Backend
-This is the backend for the project using FastAPI. It is simple API containing a single endpoint that returns a classificaiton for a given email.
+This is the backend for the project using FastAPI. It is simple API containing a single endpoint that returns a classification for a given email.
 
 
 ## Project Setup
@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ### Run the server
 
 ```sh
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ### Train the model
@@ -26,17 +26,17 @@ python ./app/models/ml/train.py
 
 ## API
 ### Predict Spam
-| Method | Endpoint | Description |
-| ------ | -------- | ----------- |
-| POST | /spam/predict | Get Prediction |
+| Method | Endpoint      | Description    |
+|--------|---------------|----------------|
+| POST   | /spam/predict | Get Prediction |
 
 #### Parameters
 No parameters
 #### Request Body
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name | Type   | Description                |
+|------|--------|----------------------------|
 | text | string | The email text to classify |
 #### Response
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type   | Description                                      |
+|-------|--------|--------------------------------------------------|
 | label | string | The predicted label, either `spam` or `not spam` |

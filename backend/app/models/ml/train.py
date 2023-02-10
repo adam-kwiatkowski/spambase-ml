@@ -3,9 +3,10 @@ import re
 
 import numpy as np
 from joblib import dump
-from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_selection import SelectKBest, chi2
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
 
 
 def get_feature_names(path):
@@ -21,25 +22,21 @@ def get_feature_names(path):
     return names
 
 
-feature_names = get_feature_names('../../../../spambase/spambase.names')
+dataset_dir = '../../../../spambase/'
+feature_names = get_feature_names(dataset_dir + 'spambase.names')
 with open("feature_names.json", "w") as f:
     json.dump(feature_names, f)
 
-data = np.genfromtxt('../../../../spambase/spambase.data', delimiter=',')
+data = np.genfromtxt(dataset_dir + 'spambase.data', delimiter=',')
 
 X, y = data[:, :-1], data[:, -1]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.75)
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
+pipeline = Pipeline([
+    ('feature_selection', SelectKBest(chi2, k=45)),
+    ('scaler', StandardScaler()),
+    ('classifier', RandomForestClassifier(n_estimators=300, max_features='log2'))
+])
 
-clf = SVC(gamma=0.0001, C=10000)
-clf.fit(X_train, y_train)
+pipeline.fit(X, y)
 
-dump(clf, 'model.joblib')
-dump(scaler, 'scaler.joblib')
-
-y_pred = clf.predict(X_test)
-accuracy = 1 - (np.sum(y_pred != y_test) / y_test.shape[0])
-print(f'Accuracy: {accuracy * 100:.{4}}%')
+dump(pipeline, 'model.joblib')
