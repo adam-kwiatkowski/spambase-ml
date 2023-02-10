@@ -11,16 +11,16 @@
     </div>
     <div class="text-gray-600 dark:text-gray-200">
       <p>
-        This application utilizes an SVM model to classify emails as spam or not spam. The model
+        This application utilizes a Random Forest classifier to label emails as spam or not spam. The model
         has been trained and tested on the Spambase dataset, which consists of over 4600 emails and 57 features. The
         dataset is publicly available at the <a href="https://archive.ics.uci.edu/ml/datasets/Spambase">UCI Machine
         Learning Repository</a>.
       </p>
       <br>
       <p>
-        The Support Vector Machine (SVM) model is a powerful machine learning algorithm that is commonly used for binary
-        classification tasks such as spam detection. SVM uses a set of features to separate the data points into
-        different classes by maximizing the margin between them.
+        Random Forest is a widely used machine learning algorithm, especially for binary classification tasks such as
+        spam detection. It works by creating an ensemble of decision trees to make predictions. The classifier considers
+        multiple features and determines the class of an email by aggregating the predictions made by each tree.
       </p>
     </div>
   </div>
