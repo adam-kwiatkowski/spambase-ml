@@ -41,7 +41,7 @@ async def startup_event():
     clf.scaler = load(settings.scaler_path)
     with open(settings.feature_names_path, 'r') as f:
         feature_names = json.load(f)
-    settings.words, settings.characters = get_words_characters(feature_names)
+    settings.words, settings.characters = split_feature_names(feature_names)
 
 
 @app.post("/spam/predict")
